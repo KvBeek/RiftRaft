@@ -75,7 +75,7 @@ public class PlayerMovementAxis : MonoBehaviour
             // Springen
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
-                jump=true;
+                Jump();
                 
             }
 
@@ -99,10 +99,9 @@ public class PlayerMovementAxis : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(jump){
-            Jump();
-            jump = false;
-        }
+        if (transform.position.y > SearchResult.projectedPositionWS.y)
+            MovePlayer();
+            
         // Controleer of de speler de grond raakt
         CheckGroundStatus();
     }

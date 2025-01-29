@@ -5,8 +5,9 @@ public class BouyingSetPositions : MonoBehaviour
     [SerializeField] GameObject[] buoyancies = new GameObject[4];
     [SerializeField] LayerMask layerMask;
 
-    void Start(){
-
+    void Start()
+    {
+        CalcBouyingPosition();
     }
 
     public void CalcBouyingPosition()
@@ -21,10 +22,10 @@ public class BouyingSetPositions : MonoBehaviour
         // Debug.DrawRay(new Vector3(left.x, 0,forward.z), Vector3.up, Color.red);  
         // Debug.DrawRay(new Vector3(left.x, 0,back.z), Vector3.up, Color.red);  
 
-        buoyancies[0].transform.position =  new Vector3(right.x, buoyancies[0].transform.position.y,forward.z);
-        buoyancies[1].transform.position =  new Vector3(right.x, buoyancies[1].transform.position.y,back.z);
-        buoyancies[2].transform.position =  new Vector3(left.x, buoyancies[2].transform.position.y,forward.z);
-        buoyancies[3].transform.position =  new Vector3(left.x, buoyancies[3].transform.position.y,back.z);
+        buoyancies[0].transform.position = new Vector3(right.x, buoyancies[0].transform.position.y, forward.z);
+        buoyancies[1].transform.position = new Vector3(right.x, buoyancies[1].transform.position.y, back.z);
+        buoyancies[2].transform.position = new Vector3(left.x, buoyancies[2].transform.position.y, forward.z);
+        buoyancies[3].transform.position = new Vector3(left.x, buoyancies[3].transform.position.y, back.z);
     }
 
     Vector3 Ray(Vector3 dir)
