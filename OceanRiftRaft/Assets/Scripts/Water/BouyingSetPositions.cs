@@ -7,11 +7,25 @@ public class BouyingSetPositions : MonoBehaviour
 
     void Start()
     {
-        CalcBouyingPosition();
+        //CalcBouyingPosition();
+    }
+
+    public void DelayCalc()
+    {
+        Invoke("CalcBouyingPosition", 0.1f);
+    }
+
+    public void SetBouyingPosition(int xmin, int xplus, int zmin, int zplus)
+    {
+        buoyancies[0].transform.localPosition = new Vector3(xplus, buoyancies[0].transform.localPosition.y,zplus);
+        buoyancies[1].transform.localPosition = new Vector3(xplus, buoyancies[1].transform.localPosition.y, zmin);
+        buoyancies[2].transform.localPosition = new Vector3(xmin, buoyancies[2].transform.localPosition.y, zmin);
+        buoyancies[3].transform.localPosition = new Vector3(xmin, buoyancies[3].transform.localPosition.y, zplus);
     }
 
     public void CalcBouyingPosition()
     {
+        //print("caclulating");
         Vector3 right = Ray(Vector3.right);
         Vector3 left = Ray(Vector3.left);
         Vector3 forward = Ray(Vector3.forward);

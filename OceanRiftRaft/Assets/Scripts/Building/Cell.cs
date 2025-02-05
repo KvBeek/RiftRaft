@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Cell : MonoBehaviour
@@ -19,7 +20,12 @@ public class Cell : MonoBehaviour
 
     float MaxBuildingDistance { get; set; }
 
-    public void SetValues(Vector3Int _locationInArray, GridManager _gridManager, GameObject _gameObject, Vector3 _location, GameObject _player, float _buildingDistance)
+    [SerializeField] RaftPartScriptableObject GameObjectToBuild;
+
+    Transform Raft { get; set; }
+    BouyingSetPositions BouyingSetPositions { get; set; }
+
+    public void SetValues(Vector3Int _locationInArray, GridManager _gridManager, GameObject _gameObject, Vector3 _location, GameObject _player, float _buildingDistance, Transform _raft, BouyingSetPositions _bouyingSetPositions)
     {
         LocationInArray = _locationInArray;
         GridManager = _gridManager;
@@ -27,6 +33,8 @@ public class Cell : MonoBehaviour
         MeshRenderer = GameObject.GetComponent<MeshRenderer>();
         Player = _player;
         MaxBuildingDistance = _buildingDistance;
+        Raft = _raft;
+        BouyingSetPositions = _bouyingSetPositions;
 
         GameObject.transform.position = _location;
         MeshRenderer.materials[0].color = Color;
@@ -34,13 +42,14 @@ public class Cell : MonoBehaviour
         BoxCollider = GetComponent<BoxCollider>();
     }
 
-    public void SetCellBuildable()
+    public void SetCellBuildable(bool buildItDirect = false)
     {
         if (HasBuildHere) return;
 
         CanBuildHere = true;
-        MeshRenderer.materials[0].color = new(0 / 255f, 0 / 255f, 255 / 255f, 0.5f);
+        MeshRenderer.materials[0].color = new(0, 0, 0, 0f);
         BoxCollider.enabled = true;
+        if (buildItDirect) BuildPart(true);
     }
 
     bool InRange()
@@ -51,24 +60,43 @@ public class Cell : MonoBehaviour
     {
         if (HasBuildHere) return;
         if (InRange())
-            MeshRenderer.materials[0].color = new(255 / 255f, 0 / 255f, 0 / 255f, 0.5f);
+            transform.GetChild(0).gameObject.SetActive(true);
         else
-            MeshRenderer.materials[0].color = new(0 / 255f, 0 / 255f, 255 / 255f, 0.5f);
+            transform.GetChild(0).gameObject.SetActive(false);
     }
 
     void OnMouseExit()
     {
         if (HasBuildHere || !InRange()) return;
-        MeshRenderer.materials[0].color = new(0 / 255f, 0 / 255f, 255 / 255f, 0.5f);
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 
     void OnMouseDown()
     {
         if (HasBuildHere || !InRange()) return;
+        BuildPart();
 
-        MeshRenderer.materials[0].color = Color.green;
+    }
+
+    void BuildPart(bool _noBuilding = false)
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
         HasBuildHere = true;
         GridManager.SetNeighboursCanBuildHere(LocationInArray);
+
+        if (_noBuilding) return;
+
+        GameObject obj = Instantiate(GameObjectToBuild.GameObject);
+        obj.transform.parent = transform;
+        obj.transform.localPosition = Vector3.zero;
+        obj.transform.localRotation = transform.localRotation;
+
+        //BouyingSetPositions.DelayCalc();
+        GridManager.UpdateBouying();
+        //obj.transform.rotation = transform.rotation;
+
+        //GridManager.UpdateBouying();
+        obj.transform.parent = transform.parent.parent;
     }
 
 }
