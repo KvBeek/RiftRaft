@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 public class RaftMovement : MonoBehaviour
 {
     public Rigidbody rb;
     public float speed = 1;
-
-    void FixedUpdate(){
-        rb.linearVelocity = new Vector3(speed, rb.linearVelocity.y, rb.linearVelocity.z);
+    public WaterSurface water;
+    void FixedUpdate()
+    {
+        rb.MovePosition(new Vector3(transform.position.x + speed * Time.fixedDeltaTime, transform.position.y, transform.position.z));
     }
 }

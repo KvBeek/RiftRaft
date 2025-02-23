@@ -9,6 +9,7 @@ public class GridManager : MonoBehaviour
     Cell[,,] cellGrid;
     [SerializeField] GameObject cellPrefab;
     [SerializeField] Transform followObject;
+    [SerializeField] Transform raftModelHolder;
     Transform gridHolder => transform;
 
     GameObject player = null;
@@ -44,7 +45,7 @@ public class GridManager : MonoBehaviour
         zplus = (zplus - baseCellLocation.z) * cellSize - 1;
         zmin = (zmin - baseCellLocation.z) * cellSize + 1;
 
-        print($"xplus {xplus} - zmin {zmin} - xmin {xmin} - zplus {zplus}");
+        //print($"xplus {xplus} - zmin {zmin} - xmin {xmin} - zplus {zplus}");
 
         bouyingSetPositions.SetBouyingPosition(xmin, xplus, zmin, zplus);
     }
@@ -65,8 +66,8 @@ public class GridManager : MonoBehaviour
 
         cellHolder.SetActive(false);
 
-        UpdateBouying();
-        
+        //Invoke("UpdateBouying", 1f);
+
     }
 
     void Update()
@@ -74,10 +75,10 @@ public class GridManager : MonoBehaviour
         transform.position = followObject.position;
         transform.rotation = followObject.rotation;
 
-        if(Input.GetKeyDown(KeyCode.B))cellHolder.SetActive(!cellHolder.activeSelf);
-        
+        if (Input.GetKeyDown(KeyCode.B)) cellHolder.SetActive(!cellHolder.activeSelf);
 
-        
+        UpdateBouying();
+
     }
 
     void InitializeCellGrid()
@@ -104,7 +105,8 @@ public class GridManager : MonoBehaviour
                         player,
                         maxBuildingDistance,
                         followObject,
-                        bouyingSetPositions
+                        bouyingSetPositions,
+                        raftModelHolder
                         );
                 }
             }

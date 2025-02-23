@@ -10,7 +10,7 @@ public class PlayerMovementAxis : MonoBehaviour
     [SerializeField] float swimSpeed = 3f;  // Snelheid van het zwemmen (omhoog/omlaag)
     [SerializeField] float jumpForce = 5f;  // Kracht van het springen
     [SerializeField] float crouchHeight = 0.25f;  // Hoogte van de speler bij het kruipen
-    [SerializeField] float standingHeight = 1f;  // Standaard hoogte van de speler
+    float standingHeight = 1f;  // Standaard hoogte van de speler
 
     private bool isGrounded;      // Controle of de speler op de grond staat
     private bool isCrouching;     // Controle of de speler aan het kruipen is
@@ -156,7 +156,7 @@ public class PlayerMovementAxis : MonoBehaviour
     void CheckGroundStatus()
     {
         // Pas de lengte van de raycast aan op basis van de hoogte van de speler
-        float rayLength = isCrouching ? crouchHeight + 0.01f : standingHeight + 0.01f;
+        float rayLength = isCrouching ? crouchHeight + 0.01f : standingHeight/2 + 0.01f;
 
         // Controleer of de speler zich op de grond bevindt
         RaycastHit hit;
@@ -173,7 +173,7 @@ public class PlayerMovementAxis : MonoBehaviour
     bool IsOnRaft()
     {
         // Bepaal de lengte van de raycast op basis van de hoogte van de speler
-        float rayLength = isCrouching ? crouchHeight + 0.1f : standingHeight + 0.1f;
+        float rayLength = isCrouching ? crouchHeight + 1f : standingHeight + 0.1f;
 
         // Controleer of de speler op een object met de tag "Raft" staat
         RaycastHit hit;

@@ -25,7 +25,9 @@ public class Cell : MonoBehaviour
     Transform Raft { get; set; }
     BouyingSetPositions BouyingSetPositions { get; set; }
 
-    public void SetValues(Vector3Int _locationInArray, GridManager _gridManager, GameObject _gameObject, Vector3 _location, GameObject _player, float _buildingDistance, Transform _raft, BouyingSetPositions _bouyingSetPositions)
+    [SerializeField] Transform RaftModelHolder { get; set; }
+
+    public void SetValues(Vector3Int _locationInArray, GridManager _gridManager, GameObject _gameObject, Vector3 _location, GameObject _player, float _buildingDistance, Transform _raft, BouyingSetPositions _bouyingSetPositions, Transform _raftModelHolder)
     {
         LocationInArray = _locationInArray;
         GridManager = _gridManager;
@@ -35,7 +37,7 @@ public class Cell : MonoBehaviour
         MaxBuildingDistance = _buildingDistance;
         Raft = _raft;
         BouyingSetPositions = _bouyingSetPositions;
-
+        RaftModelHolder = _raftModelHolder;
         GameObject.transform.position = _location;
         MeshRenderer.materials[0].color = Color;
 
@@ -92,11 +94,11 @@ public class Cell : MonoBehaviour
         obj.transform.localRotation = transform.localRotation;
 
         //BouyingSetPositions.DelayCalc();
-        GridManager.UpdateBouying();
+        //GridManager.UpdateBouying();
         //obj.transform.rotation = transform.rotation;
 
         //GridManager.UpdateBouying();
-        obj.transform.parent = transform.parent.parent;
+        obj.transform.parent = RaftModelHolder;
     }
 
 }

@@ -7,7 +7,7 @@ public class BouyingSetPositions : MonoBehaviour
 
     void Start()
     {
-        //CalcBouyingPosition();
+        //DelayCalc();
     }
 
     public void DelayCalc()
@@ -22,8 +22,9 @@ public class BouyingSetPositions : MonoBehaviour
         buoyancies[2].transform.localPosition = new Vector3(xmin, buoyancies[2].transform.localPosition.y, zmin);
         buoyancies[3].transform.localPosition = new Vector3(xmin, buoyancies[3].transform.localPosition.y, zplus);
     }
-
+    [ContextMenu("CalcBouyingPosition")]
     public void CalcBouyingPosition()
+    //void Update()
     {
         //print("caclulating");
         Vector3 right = Ray(Vector3.right);

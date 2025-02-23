@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 
-public class Floater : MonoBehaviour
+public class PlayerFloating : MonoBehaviour
 {
     public Rigidbody rb;
 

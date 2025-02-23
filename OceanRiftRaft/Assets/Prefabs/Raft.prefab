@@ -181,12 +181,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2042635346756268013}
-  depthBefSub: 0.3
-  displacementAmt: 1
+  depthBefSub: 2
+  displacementAmt: 10
   floaters: 4
-  waterDrag: 1
-  waterAngularDrag: 30
+  waterDrag: 2
+  waterAngularDrag: 1
   water: {fileID: 0}
+  dampingFactor: 0.1
 --- !u!1 &2173112725985519235
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,12 +288,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2042635346756268013}
-  depthBefSub: 0.3
-  displacementAmt: 1
+  depthBefSub: 2
+  displacementAmt: 10
   floaters: 4
-  waterDrag: 1
-  waterAngularDrag: 30
+  waterDrag: 2
+  waterAngularDrag: 1
   water: {fileID: 0}
+  dampingFactor: 0.1
 --- !u!1 &5945293063552560951
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,12 +366,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5945293063552560951}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1529d5453cd51d2458df3754bddfb2e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 2042635346756268013}
   speed: 1
 --- !u!1 &5957043021591744946
 GameObject:
@@ -416,12 +417,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2042635346756268013}
-  depthBefSub: 0.3
-  displacementAmt: 1
+  depthBefSub: 2
+  displacementAmt: 10
   floaters: 4
-  waterDrag: 1
-  waterAngularDrag: 30
+  waterDrag: 2
+  waterAngularDrag: 1
   water: {fileID: 0}
+  dampingFactor: 0.1
 --- !u!1 &7633173267223960832
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,12 +469,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2042635346756268013}
-  depthBefSub: 0.3
-  displacementAmt: 1
+  depthBefSub: 2
+  displacementAmt: 10
   floaters: 4
-  waterDrag: 1
-  waterAngularDrag: 30
+  waterDrag: 2
+  waterAngularDrag: 1
   water: {fileID: 0}
+  dampingFactor: 0.1
 --- !u!1 &8043333457466335556
 GameObject:
   m_ObjectHideFlags: 0
